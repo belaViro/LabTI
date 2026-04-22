@@ -542,11 +542,11 @@ function getTendencyText(type, secondary) {
   var curData = results[type];
   
   if (pct >= 40) {
-    return '你的<strong>' + secondary.dimName + '</strong>指数高达 ' + pct + '%——你距离「' + secData.title + '」只差一个冲动的决定。';
+    return '你的<strong>' + secondary.dimName + '</strong>维度极不稳定（' + pct + '%）。你表面上登记为「' + curData.title + '」，但系统检测到你的「' + secData.title + '」属性正在侵蚀本体。';
   } else if (pct >= 25) {
-    return '你的<strong>' + secondary.dimName + '</strong>倾向正在觉醒（' + pct + '%）。在特定压力下，你可能滑向「' + secData.title + '」。';
+    return '你的<strong>' + secondary.dimName + '</strong>维度出现裂缝（' + pct + '%）。在特定压力下，你会从「' + curData.title + '」滑向「' + secData.title + '」。';
   } else {
-    return '你的<strong>' + secondary.dimName + '</strong>指数仅为 ' + pct + '%——你的「' + curData.title + '」人格相当纯粹。';
+    return '你的<strong>' + secondary.dimName + '</strong>维度相当坚定（' + pct + '%）。「' + curData.title + '」是你的稳定态，「' + secData.title + '」只是你偶尔做的噩梦。';
   }
 }
 
@@ -580,12 +580,12 @@ function showResult() {
   $('res-guide').textContent = data.guide;
   $('res-boss').innerHTML = data.boss;
 
-  // 隐藏人格渲染
+  // 最摇摆维度渲染
   var secData = results[secondary.type];
   $('sec-animal').textContent = secData.animal;
   $('sec-type').textContent = secondary.type;
   $('sec-title').textContent = secData.title;
-  $('sec-desc').textContent = '你的隐藏人格是「' + secData.title + '」，倾向度 ' + secondary.pct + '%。这意味着在特定情境下，你可能会表现出 ' + secData.title + ' 的特征：' + secData.curse;
+  $('sec-desc').textContent = '当你在某些时刻不再是「' + data.title + '」，你会表现出「' + secData.title + '」的特征：' + secData.curse;
   $('sec-fill').style.width = secondary.pct + '%';
 
   // 恶趣味补丁渲染（稀有度 + 寿命 + 转行）
