@@ -568,7 +568,7 @@ function showResult() {
   const total = Object.values(scores).reduce(function(a, b) { return a + b; }, 0);
   let type, data;
 
-  if (total < 8) {
+  if (total <= 8) {
     type = easterEgg.type;
     data = easterEgg;
   } else {
@@ -690,7 +690,7 @@ function drawRadar() {
   const labels = ['真理T', '叛逆R', '硬核H', '内卷C'];
   const colors = ['#1a1a1a', '#8b1a1a', '#1e3a5f', '#b45309'];
 
-  ctx.clearRect(0, 0, displaySize, displaySize);
+  ctx.clearRect(0, 0, displaySize * dpr, displaySize * dpr);
 
   // 网格
   for (let i = 1; i <= 4; i++) {
@@ -754,10 +754,10 @@ function drawRadar() {
 /* ===== 分享海报 ===== */
 
 function openShareModal() {
-  const imgUrl = generateShareImage();
-  $('share-img').src = imgUrl;
-  $('download-link').href = imgUrl;
-  $('share-modal').classList.remove('hidden');
+  generateShareImage().then(function(imgUrl) {
+    $('share-img').src = imgUrl;
+    $('share-modal').classList.remove('hidden');
+  });
 }
 
 function closeShareModal() {
@@ -936,8 +936,8 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
 
 /* ===== 假人数动画 ===== */
 let count = 87326;
+const fakeCountEl = $('fake-count');
 setInterval(function() {
   count += Math.floor(Math.random() * 3);
-  const el = $('fake-count');
-  if (el) el.textContent = count.toLocaleString();
+  if (fakeCountEl) fakeCountEl.textContent = count.toLocaleString();
 }, 3000);
