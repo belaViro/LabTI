@@ -429,25 +429,28 @@ const easterEgg = {
 let current = 0;
 let scores = { T:0, P:0, R:0, L:0, H:0, S:0, C:0, F:0 };
 
+/* ===== DOM 缓存 ===== */
+const $ = function(id) { return document.getElementById(id); };
+
 /* ===== 核心逻辑 ===== */
 
 function startQuiz() {
-  document.getElementById('welcome').classList.add('hidden');
-  document.getElementById('quiz').classList.remove('hidden');
+  $('welcome').classList.add('hidden');
+  $('quiz').classList.remove('hidden');
   renderQuestion();
 }
 
 function renderQuestion() {
   const q = questions[current];
-  document.getElementById('question-count').textContent =
+  $('question-count').textContent =
     '问题 ' + (current + 1) + ' / ' + questions.length;
-  document.getElementById('progress-fill').style.width =
+  $('progress-fill').style.width =
     (current / questions.length * 100) + '%';
-  document.getElementById('question-number').textContent =
+  $('question-number').textContent =
     'QUESTION ' + String(current + 1).padStart(2, '0');
-  document.getElementById('question-text').textContent = q.q;
+  $('question-text').textContent = q.q;
 
-  const optsDiv = document.getElementById('options');
+  const optsDiv = $('options');
   optsDiv.innerHTML = '';
   q.opts.forEach(function(opt, idx) {
     const div = document.createElement('div');
@@ -474,8 +477,8 @@ function choose(idx) {
 }
 
 function showLoader() {
-  document.getElementById('quiz').classList.add('hidden');
-  document.getElementById('loader').classList.remove('hidden');
+  $('quiz').classList.add('hidden');
+  $('loader').classList.remove('hidden');
 
   const lines = [
     '> 正在提取脑脊液样本... [PH值：咖啡]',
@@ -491,7 +494,7 @@ function showLoader() {
     '> 分析完成。准备宣读判决书...'
   ];
 
-  const term = document.getElementById('terminal');
+  const term = $('terminal');
   term.innerHTML = '';
   let i = 0;
 
@@ -559,8 +562,8 @@ function getTendencyText(type, secondary) {
 }
 
 function showResult() {
-  document.getElementById('loader').classList.add('hidden');
-  document.getElementById('result').classList.remove('hidden');
+  $('loader').classList.add('hidden');
+  $('result').classList.remove('hidden');
 
   const total = Object.values(scores).reduce(function(a, b) { return a + b; }, 0);
   let type, data;
@@ -577,49 +580,49 @@ function showResult() {
     data = results[type] || easterEgg;
   }
 
-  document.getElementById('res-animal').textContent = data.animal;
-  document.getElementById('res-type').textContent = type;
-  document.getElementById('res-title').textContent = data.title;
-  document.getElementById('res-curse').textContent = data.curse;
-  document.getElementById('res-crime').textContent = data.crime;
+  $('res-animal').textContent = data.animal;
+  $('res-type').textContent = type;
+  $('res-title').textContent = data.title;
+  $('res-curse').textContent = data.curse;
+  $('res-crime').textContent = data.crime;
 
   // 倾向度诊断
   var secondary = getSecondaryType(type, scores);
   var tendencyText = getTendencyText(type, secondary);
-  document.getElementById('tendency-text').innerHTML = tendencyText;
-  document.getElementById('tendency-fill').style.width = secondary.pct + '%';
+  $('tendency-text').innerHTML = tendencyText;
+  $('tendency-fill').style.width = secondary.pct + '%';
 
   const descHtml = data.crimeDesc.replace(/\n/g, '<br>');
-  document.getElementById('res-desc').innerHTML = descHtml;
-  document.getElementById('res-crime-desc').innerHTML = descHtml;
-  document.getElementById('res-danger').textContent = data.danger;
-  document.getElementById('res-guide').textContent = data.guide;
-  document.getElementById('res-boss').innerHTML = data.boss;
+  $('res-desc').innerHTML = descHtml;
+  $('res-crime-desc').innerHTML = descHtml;
+  $('res-danger').textContent = data.danger;
+  $('res-guide').textContent = data.guide;
+  $('res-boss').innerHTML = data.boss;
 
   // 隐藏人格渲染
   var secData = results[secondary.type] || easterEgg;
-  document.getElementById('sec-animal').textContent = secData.animal;
-  document.getElementById('sec-type').textContent = secondary.type;
-  document.getElementById('sec-title').textContent = secData.title;
-  document.getElementById('sec-desc').textContent = '你的隐藏人格是「' + secData.title + '」，倾向度 ' + secondary.pct + '%。这意味着在特定情境下，你可能会表现出 ' + secData.title + ' 的特征：' + secData.curse;
-  document.getElementById('sec-fill').style.width = secondary.pct + '%';
+  $('sec-animal').textContent = secData.animal;
+  $('sec-type').textContent = secondary.type;
+  $('sec-title').textContent = secData.title;
+  $('sec-desc').textContent = '你的隐藏人格是「' + secData.title + '」，倾向度 ' + secondary.pct + '%。这意味着在特定情境下，你可能会表现出 ' + secData.title + ' 的特征：' + secData.curse;
+  $('sec-fill').style.width = secondary.pct + '%';
 
   // 恶趣味补丁渲染
   const patch = resultPatches[type];
   if (patch) {
-    document.getElementById('res-lifespan').textContent = patch.lifespan;
-    document.getElementById('lifespan-fill').style.width = patch.lifespanPct + '%';
-    document.getElementById('lifespan-label').textContent = '学术寿命指数：' + patch.lifespanPct + '%（基于历史尸检数据）';
-    document.getElementById('res-review').innerHTML = patch.review;
-    document.getElementById('res-advisor').innerHTML = patch.advisorComment;
-    document.getElementById('res-career').textContent = patch.career;
+    $('res-lifespan').textContent = patch.lifespan;
+    $('lifespan-fill').style.width = patch.lifespanPct + '%';
+    $('lifespan-label').textContent = '学术寿命指数：' + patch.lifespanPct + '%（基于历史尸检数据）';
+    $('res-review').innerHTML = patch.review;
+    $('res-advisor').innerHTML = patch.advisorComment;
+    $('res-career').textContent = patch.career;
   } else {
-    document.getElementById('res-lifespan').textContent = '无法预测。你的存在本身就违背了统计学假设。';
-    document.getElementById('lifespan-fill').style.width = '0%';
-    document.getElementById('lifespan-label').textContent = '学术寿命指数：NULL';
-    document.getElementById('res-review').innerHTML = '<span class="reviewer">System:</span> "No data available. The subject is not even a researcher."';
-    document.getElementById('res-advisor').innerHTML = '无评语。<span class="translation">翻译：系统拒绝评价。</span>';
-    document.getElementById('res-career').textContent = '建议删除此账号。';
+    $('res-lifespan').textContent = '无法预测。你的存在本身就违背了统计学假设。';
+    $('lifespan-fill').style.width = '0%';
+    $('lifespan-label').textContent = '学术寿命指数：NULL';
+    $('res-review').innerHTML = '<span class="reviewer">System:</span> "No data available. The subject is not even a researcher."';
+    $('res-advisor').innerHTML = '无评语。<span class="translation">翻译：系统拒绝评价。</span>';
+    $('res-career').textContent = '建议删除此账号。';
   }
 
   renderSpectrum();
@@ -635,7 +638,7 @@ function renderSpectrum() {
     { left: '内卷(C)', right: '躺平(F)', l: scores.C, r: scores.F, color: '#b45309' }
   ];
 
-  const wrap = document.getElementById('spectrum-wrap');
+  const wrap = $('spectrum-wrap');
   wrap.innerHTML = '';
 
   dims.forEach(function(d) {
@@ -661,7 +664,7 @@ function renderSpectrum() {
 
 /* ===== 雷达图 ===== */
 function drawRadar() {
-  const cvs = document.getElementById('radar');
+  const cvs = $('radar');
   const ctx = cvs.getContext('2d');
 
   // 高清屏适配
@@ -750,13 +753,13 @@ function drawRadar() {
 
 function openShareModal() {
   const imgUrl = generateShareImage();
-  document.getElementById('share-img').src = imgUrl;
-  document.getElementById('download-link').href = imgUrl;
-  document.getElementById('share-modal').classList.remove('hidden');
+  $('share-img').src = imgUrl;
+  $('download-link').href = imgUrl;
+  $('share-modal').classList.remove('hidden');
 }
 
 function closeShareModal() {
-  document.getElementById('share-modal').classList.add('hidden');
+  $('share-modal').classList.add('hidden');
 }
 
 /* ===== 每型专属配色（MBTI卡片风） ===== */
@@ -780,7 +783,7 @@ const typeColors = {
 };
 
 async function generateShareImage() {
-  const type = document.getElementById('res-type').textContent;
+  const type = $('res-type').textContent;
   const style = typeColors[type] || { bg: '#1a1a1a', accent: '#fff', tags: ['未知'] };
 
   const canvas = document.createElement('canvas');
@@ -803,10 +806,10 @@ async function generateShareImage() {
   ctx.fillText('科研TI  ·  RESEARCHER TYPE INDICATOR', 300, 95);
 
   // ===== 获取数据 =====
-  const animal = document.getElementById('res-animal').textContent;
-  const title = document.getElementById('res-title').textContent;
-  const curse = document.getElementById('res-curse').textContent;
-  const crime = document.getElementById('res-crime').textContent;
+  const animal = $('res-animal').textContent;
+  const title = $('res-title').textContent;
+  const curse = $('res-curse').textContent;
+  const crime = $('res-crime').textContent;
 
   // ===== 大 Emoji =====
   ctx.textAlign = 'center';
@@ -951,6 +954,6 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
 let count = 87326;
 setInterval(function() {
   count += Math.floor(Math.random() * 3);
-  const el = document.getElementById('fake-count');
+  const el = $('fake-count');
   if (el) el.textContent = count.toLocaleString();
 }, 3000);
