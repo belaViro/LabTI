@@ -414,17 +414,6 @@ const resultPatches = {
 /* ===== 网站配置（部署后修改） ===== */
 const SITE_URL = 'http://www.labti.top';
 
-/* ===== 彩蛋人格 ===== */
-const easterEgg = {
-  type: "REJECT", animal: "🤖", title: "审稿人2号",
-  curse: "\"Novelty is not enough. Reject.\"",
-  crime: "核心罪名：冷漠罪",
-  crimeDesc: "你根本不在乎这个测试，就像审稿人根本不在乎你的论文。你机械地选完了所有选项，内心毫无波澜。你的冷漠是系统训练出来的——你已经看过太多烂论文，以至于对一切失去了期待。",
-  danger: "你的冷漠伤害了无数投稿人的心灵。但你不在乎，因为你知道：下一份稿件更烂。你会在深夜的审稿系统前独自老去，而你的拒稿率将成为传说。",
-  guide: "建议转行去当编辑，那里有权力，而且没有实验失败的烦恼。或者——试着重新相信一次，哪怕只是假装相信。",
-  boss: "你不需要导师，你需要一个永远不退稿的期刊。但那种期刊不存在，所以你永远孤独。"
-};
-
 /* ===== 状态 ===== */
 let current = 0;
 let scores = { T:0, P:0, R:0, L:0, H:0, S:0, C:0, F:0 };
@@ -549,8 +538,8 @@ function getSecondaryType(type, scores) {
 
 function getTendencyText(type, secondary) {
   var pct = secondary.pct;
-  var secData = results[secondary.type] || easterEgg;
-  var curData = results[type] || easterEgg;
+  var secData = results[secondary.type];
+  var curData = results[type];
   
   if (pct >= 40) {
     return '你的<strong>' + secondary.dimName + '</strong>指数高达 ' + pct + '%——你距离「' + secData.title + '」只差一个冲动的决定。';
@@ -565,20 +554,12 @@ function showResult() {
   $('loader').classList.add('hidden');
   $('result').classList.remove('hidden');
 
-  const total = Object.values(scores).reduce(function(a, b) { return a + b; }, 0);
-  let type, data;
-
-  if (total <= 8) {
-    type = easterEgg.type;
-    data = easterEgg;
-  } else {
-    const d1 = scores.T >= scores.P ? 'T' : 'P';
-    const d2 = scores.R >= scores.L ? 'R' : 'L';
-    const d3 = scores.H >= scores.S ? 'H' : 'S';
-    const d4 = scores.C >= scores.F ? 'C' : 'F';
-    type = d1 + d2 + d3 + d4;
-    data = results[type] || easterEgg;
-  }
+  const d1 = scores.T >= scores.P ? 'T' : 'P';
+  const d2 = scores.R >= scores.L ? 'R' : 'L';
+  const d3 = scores.H >= scores.S ? 'H' : 'S';
+  const d4 = scores.C >= scores.F ? 'C' : 'F';
+  const type = d1 + d2 + d3 + d4;
+  const data = results[type];
 
   $('res-animal').textContent = data.animal;
   $('res-type').textContent = type;
@@ -600,7 +581,7 @@ function showResult() {
   $('res-boss').innerHTML = data.boss;
 
   // 隐藏人格渲染
-  var secData = results[secondary.type] || easterEgg;
+  var secData = results[secondary.type];
   $('sec-animal').textContent = secData.animal;
   $('sec-type').textContent = secondary.type;
   $('sec-title').textContent = secData.title;
