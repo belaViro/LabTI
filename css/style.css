@@ -626,6 +626,26 @@ body {
   font-family: var(--font-mono);
 }
 
+/* ===== 稀有度 ===== */
+.rarity-bar {
+  height: 8px;
+  background: #e8e5df;
+  margin-top: 10px;
+  position: relative;
+}
+
+.rarity-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #b45309, #d97706);
+}
+
+.rarity-label {
+  font-size: 0.75rem;
+  color: var(--light);
+  margin-top: 6px;
+  font-family: var(--font-mono);
+}
+
 /* ===== 分享弹窗 ===== */
 .modal {
   position: fixed;

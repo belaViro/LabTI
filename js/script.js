@@ -300,81 +300,113 @@ const resultPatches = {
   PLHC: {
     lifespan: '预计再撑2.3个项目周期。主要死因：导师又接了一个新项目，你被抽去"帮忙"。',
     lifespanPct: 15,
+    rarity: 18,
+    rarityDesc: '烂大街。你身边至少有3个同款。',
     career: '送外卖。至少按单结算，不会被抢一作。'
   },
   PLHF: {
     lifespan: '预计寿命等于你的最长学习年限倒计时。好消息：导师可能比你还急。',
     lifespanPct: 10,
+    rarity: 15,
+    rarityDesc: '常见。每个实验室都有几个，只是叫法不同。',
     career: '公务员。你的温顺终于成了优点。'
   },
   PLSC: {
     lifespan: '永续经营。除非你的靠山倒了，或者你靠山的孩子也需要这个位置。',
     lifespanPct: 95,
+    rarity: 3,
+    rarityDesc: '极罕见。导师酒桌上的接班人，未来学阀。',
     career: 'politician。你已经具备了所有必要技能。'
   },
   PLFC: {
     lifespan: '美貌保质期约3年，关系网半衰期约5年。建议尽早转型为"学术名媛"。',
     lifespanPct: 40,
+    rarity: 4,
+    rarityDesc: '罕见。朋友圈合照里永远C位，但实验记录本永远是空的。',
     career: '网红经纪。你深谙包装人设之道。'
   },
   PRHC: {
     lifespan: '毕业倒计时已启动。目前剩余：取决于你最后一次投稿能否被接收，以及导师是否愿意签字。',
     lifespanPct: 20,
+    rarity: 8,
+    rarityDesc: '偶尔可见。组里可能有一个，但你没注意。',
     career: '独立咨询师。至少不用再跪了，虽然可能没客户。'
   },
   PRHF: {
     lifespan: '预计寿命：直到导师忍无可忍把你踢出群聊。但你可能会因为"存在感太低"而被遗忘在群里，继续摸鱼。',
     lifespanPct: 70,
+    rarity: 12,
+    rarityDesc: '常见。Steam在线列表里一半都是这型。',
     career: '游戏主播。你已经在训练了，而且段位比科研水平高得多。'
   },
   PRSC: {
     lifespan: '直到下一个AI工具取代你。或者直到你的粉丝发现你的"秘籍"是从知乎抄的。',
     lifespanPct: 60,
+    rarity: 5,
+    rarityDesc: '稀少。B站科研区Up主里能找出几个。',
     career: '你已经在做了，而且做得很好。'
   },
   PRSF: {
     lifespan: '直到导师要求你提交独立代表作。预计还有1-3年，珍惜你最后的蹭名时光。',
     lifespanPct: 25,
+    rarity: 6,
+    rarityDesc: '不多见。简历很长，但没人记得他长什么样。',
     career: '人力资源。擅长蹭项目和混圈子，这确实是HR的核心技能。'
   },
   TLHC: {
     lifespan: '在国内的毕业概率≈0。在国外的毕业概率≈∞。几何平均：你算算。',
     lifespanPct: 50,
+    rarity: 2,
+    rarityDesc: '传说级。真正的科学家，但可能已经转行了。',
     career: '工业界研发。那里尊重你的想法，而且收入是助学金的10倍。'
   },
   TLHF: {
     lifespan: '预计寿命：无限。因为你从不参与竞争，所以也永远不会被淘汰——只会被遗忘在实验室的角落里发霉。',
     lifespanPct: 40,
+    rarity: 8,
+    rarityDesc: '偶尔可见。角落里那堆过期试剂旁边可能就坐着一个。',
     career: '实验室设备管理员。反正你比任何人都熟悉器材位置和过期试剂的库存。'
   },
   TLSC: {
     lifespan: '直到科普被纳入学术评价体系。也就是：永远不会。',
     lifespanPct: 45,
+    rarity: 4,
+    rarityDesc: '罕见。科学界不认可，但评论区认。',
     career: '脱口秀演员。你已经具备了核心技能：把痛苦变成笑声。'
   },
   TLSF: {
     lifespan: '直到你学会说"不"。根据当前趋势，预计寿命：无限趋近于你的最长学习年限。',
     lifespanPct: 20,
+    rarity: 5,
+    rarityDesc: '稀少。组会最早到的人，但也是最早被遗忘的。',
     career: '行政助理。你的终极归宿。'
   },
   TRHC: {
     lifespan: '直到你被所有期刊联合封杀。以你目前的拉黑速度，预计还有1-2年。',
     lifespanPct: 10,
+    rarity: 2,
+    rarityDesc: '传说级。活着的良心，但也是所有期刊黑名单的常客。',
     career: '调查记者。说真话的勇气还在，而且不需要影响因子。'
   },
   TRHF: {
     lifespan: '预计寿命：直到你的"理论"在组会上被公开处刑。或者直到你发现毕业比推翻相对论更难——以先到者为准。',
     lifespanPct: 20,
+    rarity: 3,
+    rarityDesc: '极罕见。推翻相对论只需要一个笔记本和一颗不屈的心。',
     career: 'B站科普UP主。反正你的理论也发不了论文，不如做成视频骗点击。'
   },
   TRSC: {
     lifespan: '直到你的粉丝发现你其实啥也没做。h-index暴露一切。',
     lifespanPct: 35,
+    rarity: 3,
+    rarityDesc: '极罕见。键盘上的学术革命家，现实中的实验回避者。',
     career: '体育评论员。反正都是嘴炮，评价C罗比评价Nature容易多了。'
   },
   TRSF: {
     lifespan: '预计寿命：直到毕业资格审查时发现你缺学分。或者直到导师在群里@你，你从不回复——以先到者为准。',
     lifespanPct: 25,
+    rarity: 2,
+    rarityDesc: '传说级。导师花名册上有名字，但没人见过真人。',
     career: '自由职业者。反正你也不需要工位，有WiFi就能活。'
   }
 };
@@ -575,14 +607,20 @@ function showResult() {
   $('sec-desc').textContent = '你的隐藏人格是「' + secData.title + '」，倾向度 ' + secondary.pct + '%。这意味着在特定情境下，你可能会表现出 ' + secData.title + ' 的特征：' + secData.curse;
   $('sec-fill').style.width = secondary.pct + '%';
 
-  // 恶趣味补丁渲染（寿命 + 转行）
+  // 恶趣味补丁渲染（稀有度 + 寿命 + 转行）
   const patch = resultPatches[type];
   if (patch) {
+    $('res-rarity').textContent = patch.rarityDesc;
+    $('rarity-fill').style.width = patch.rarity + '%';
+    $('rarity-label').textContent = '全实验室检出率：' + patch.rarity + '%（基于非正规抽样调查）';
     $('res-lifespan').textContent = patch.lifespan;
     $('lifespan-fill').style.width = patch.lifespanPct + '%';
     $('lifespan-label').textContent = '学术寿命指数：' + patch.lifespanPct + '%（基于历史尸检数据）';
     $('res-career').textContent = patch.career;
   } else {
+    $('res-rarity').textContent = '无法统计。你的样本量n=1，且拒绝重复实验。';
+    $('rarity-fill').style.width = '0%';
+    $('rarity-label').textContent = '全实验室检出率：NULL';
     $('res-lifespan').textContent = '无法预测。你的存在本身就违背了统计学假设。';
     $('lifespan-fill').style.width = '0%';
     $('lifespan-label').textContent = '学术寿命指数：NULL';
