@@ -884,13 +884,12 @@ async function generateShareImage() {
   return canvas.toDataURL('image/png');
 }
 
-/* ===== 二维码绘制（零依赖，调用免费API） ===== */
+/* ===== 二维码绘制（内嵌base64，零CORS问题） ===== */
 function drawQRCode(ctx, url, x, y, size) {
   return new Promise(function(resolve) {
     var img = new Image();
     img.onload = function() {
       ctx.drawImage(img, x, y, size, size);
-      // 二维码下方小字
       ctx.fillStyle = 'rgba(255,255,255,0.7)';
       ctx.font = '10px sans-serif';
       ctx.textAlign = 'center';
@@ -898,7 +897,6 @@ function drawQRCode(ctx, url, x, y, size) {
       resolve();
     };
     img.onerror = function() {
-      // 加载失败 fallback
       ctx.strokeStyle = 'rgba(255,255,255,0.3)';
       ctx.lineWidth = 1;
       ctx.strokeRect(x, y, size, size);
@@ -908,7 +906,7 @@ function drawQRCode(ctx, url, x, y, size) {
       ctx.fillText('二维码加载失败', x + size / 2, y + size / 2 + 4);
       resolve();
     };
-    img.src = 'images/qrcode.png';
+    img.src = QR_CODE_BASE64;
   });
 }
 
