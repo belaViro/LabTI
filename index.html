@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>科研TI — 学术圈人格诊断系统</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container">
+
+<!-- 欢迎页 -->
+<section id="welcome">
+  <div class="hero">
+    <div class="logo">&#x1F9EC;</div>
+    <h1>科研 TI</h1>
+    <div class="subtitle">Researcher Type Indicator</div>
+    <div class="tag">学术圈人格诊断档案 · 测测你的核心罪名</div>
+    <div class="divider"></div>
+    <div class="animal-row">
+      <span>&#x1FAF4;</span><span>&#x1F980;</span><span>&#x1F3AF;</span><span>&#x1F98A;</span>
+      <span>&#x1F422;</span><span>&#x1F3AD;</span><span>&#x1F99A;</span><span>&#x1F994;</span>
+      <span>&#x1F47B;</span><span>&#x1F6F8;</span><span>&#x1F4E2;</span><span>&#x1F9F8;</span>
+    </div>
+    <div class="badge">未通过任何伦理审查委员会批准</div>
+    <div class="intro">
+      基于非正规心理学、实验室田野调查和凌晨三点的组会记录，<br>
+      十二道灵魂拷问，揭示你的科研本质与核心罪名。<br>
+      <strong>如果你感觉被冒犯，那说明我们戳中了真问题。</strong>
+    </div>
+    <div>
+      <button class="btn btn-primary" onclick="startQuiz()">开始诊断（12题）</button>
+      <button class="btn btn-secondary" onclick="alert('本测试不提供心理安慰或学术建议。如有不适，请立刻转行。')">免责声明</button>
+    </div>
+    <div class="fake-counter">已有 <span id="fake-count">87,326</span> 名学术受害者确诊了他们的罪名</div>
+  </div>
+</section>
+
+<!-- 测试页 -->
+<section id="quiz" class="hidden">
+  <div class="quiz-header">
+    <div class="progress-bg"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div>
+    <div class="question-count" id="question-count">问题 1 / 12</div>
+  </div>
+  <div class="question-box" id="question-box">
+    <div class="question-number" id="question-number">QUESTION 01</div>
+    <div class="question-text" id="question-text">加载中...</div>
+    <div class="options" id="options"></div>
+  </div>
+</section>
+
+<!-- 加载页 -->
+<section id="loader" class="hidden">
+  <div class="loader">
+    <div class="loader-icon">&#x1F9EA;</div>
+    <div class="terminal" id="terminal"></div>
+  </div>
+</section>
+
+<!-- 结果页 -->
+<section id="result" class="hidden">
+  <div class="result-header">
+    <div class="result-animal" id="res-animal">&#x1FAF4;</div>
+    <div class="result-type" id="res-type">????</div>
+    <div class="result-title" id="res-title">加载中...</div>
+    <div class="result-curse" id="res-curse">...</div>
+    <div class="crime-badge" id="res-crime">罪名：未知</div>
+  </div>
+
+  <div class="tendency-box" id="tendency-box">
+    <div class="tendency-text" id="tendency-text"></div>
+    <div class="tendency-bar"><div class="tendency-fill" id="tendency-fill" style="width: 0%"></div></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x1F4C8;</span>四维光谱 · 你的学术人设</div>
+    <div class="spectrum-wrap" id="spectrum-wrap"></div>
+    <div class="radar-wrap"><canvas id="radar" width="280" height="280"></canvas></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x1F5E3;</span>人格画像</div>
+    <div class="result-text" id="res-desc"></div>
+  </div>
+
+  <div class="archive-card secondary-card">
+    <div class="section-title"><span class="icon">&#x1F464;</span>你的隐藏人格</div>
+    <div class="secondary-header">
+      <span class="secondary-animal" id="sec-animal">?</span>
+      <span class="secondary-type" id="sec-type">????</span>
+      <span class="secondary-title" id="sec-title">计算中...</span>
+    </div>
+    <div class="secondary-bar"><div class="secondary-fill" id="sec-fill" style="width: 0%"></div></div>
+    <div class="result-text" id="sec-desc"></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x2696;</span>核心罪名</div>
+    <div class="result-text" id="res-crime-desc"></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x2620;</span>你最可能遇到的困境</div>
+    <div class="danger-box" id="res-danger"></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x1F9ED;</span>生存指南</div>
+    <div class="warn-box" id="res-guide"></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x1F454;</span>最适配的导师类型</div>
+    <div class="boss-box" id="res-boss"></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x23F3;</span>学术寿命预测</div>
+    <div class="result-text" id="res-lifespan"></div>
+    <div class="lifespan-bar"><div class="lifespan-fill" id="lifespan-fill" style="width: 0%"></div></div>
+    <div class="lifespan-label" id="lifespan-label"></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x1F4E8;</span>同行评审意见</div>
+    <div class="review-box" id="res-review"></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x1F4AC;</span>导师评语</div>
+    <div class="quote-box" id="res-advisor"></div>
+  </div>
+
+  <div class="archive-card">
+    <div class="section-title"><span class="icon">&#x1F6AA;</span>推荐转行方向</div>
+    <div class="result-text" id="res-career"></div>
+  </div>
+
+  <div class="share-hint">截图发朋友圈，看看谁和你同一种学术动物。</div>
+  <div class="btn-group">
+    <button class="btn btn-primary" onclick="location.reload()">再测一次（会改变吗？）</button>
+    <button class="btn btn-secondary" onclick="openShareModal()">生成分享海报</button>
+  </div>
+
+  <!-- 分享海报弹窗 -->
+  <div id="share-modal" class="modal hidden">
+    <div class="modal-overlay" onclick="closeShareModal()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title">分享海报</span>
+        <button class="modal-close" onclick="closeShareModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <img id="share-img" alt="分享海报">
+        <p class="modal-hint">长按图片保存，测测你的同门是什么罪名</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
