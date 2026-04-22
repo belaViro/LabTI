@@ -380,7 +380,7 @@ const resultPatches = {
 };
 
 /* ===== 网站配置（部署后修改） ===== */
-const SITE_URL = ''; // 例如: 'https://sciti.io' 或 'https://yourname.github.io/sciti'
+const SITE_URL = 'http://www.labti.top';
 
 /* ===== 彩蛋人格 ===== */
 const easterEgg = {
@@ -849,25 +849,7 @@ async function generateShareImage() {
 /* ===== 二维码绘制（零依赖，调用免费API） ===== */
 function drawQRCode(ctx, url, x, y, size) {
   return new Promise(function(resolve) {
-    if (!url) {
-      // 未配置域名：画占位框+提示
-      ctx.strokeStyle = 'rgba(255,255,255,0.35)';
-      ctx.lineWidth = 1;
-      ctx.setLineDash([4, 3]);
-      ctx.strokeRect(x, y, size, size);
-      ctx.setLineDash([]);
-      ctx.fillStyle = 'rgba(255,255,255,0.6)';
-      ctx.font = '11px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('扫码测试', x + size / 2, y + size / 2 + 4);
-      ctx.font = '9px sans-serif';
-      ctx.fillText('（部署后配置域名）', x + size / 2, y + size / 2 + 20);
-      resolve();
-      return;
-    }
-
     var img = new Image();
-    img.crossOrigin = 'anonymous';
     img.onload = function() {
       ctx.drawImage(img, x, y, size, size);
       // 二维码下方小字
@@ -888,7 +870,7 @@ function drawQRCode(ctx, url, x, y, size) {
       ctx.fillText('二维码加载失败', x + size / 2, y + size / 2 + 4);
       resolve();
     };
-    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + encodeURIComponent(url);
+    img.src = 'images/qrcode.png';
   });
 }
 

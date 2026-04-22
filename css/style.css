@@ -713,4 +713,6 @@ body {
   .result-title { font-size: 1.25rem; }
   .archive-card { padding: 20px; }
   .question-text { font-size: 1.15rem; }
+  .btn-group { flex-direction: column; align-items: stretch; }
+  .btn-group .btn { width: 100%; text-align: center; padding: 14px 20px; }
 }
