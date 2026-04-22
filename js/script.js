@@ -751,6 +751,24 @@ function drawRadar() {
   }
 }
 
+/* ===== 颜色工具 ===== */
+function shadeColor(color, percent) {
+  var R = parseInt(color.substring(1,3),16);
+  var G = parseInt(color.substring(3,5),16);
+  var B = parseInt(color.substring(5,7),16);
+  R = parseInt(R * (100 + percent) / 100);
+  G = parseInt(G * (100 + percent) / 100);
+  B = parseInt(B * (100 + percent) / 100);
+  R = (R<255)?R:255;
+  G = (G<255)?G:255;
+  B = (B<255)?B:255;
+  R = Math.round(R); G = Math.round(G); B = Math.round(B);
+  var RR = ((R.toString(16).length==1)?"0"+R.toString(16):R.toString(16));
+  var GG = ((G.toString(16).length==1)?"0"+G.toString(16):G.toString(16));
+  var BB = ((B.toString(16).length==1)?"0"+B.toString(16):B.toString(16));
+  return "#"+RR+GG+BB;
+}
+
 /* ===== 分享海报 ===== */
 
 function openShareModal() {
@@ -788,24 +806,47 @@ async function generateShareImage() {
   const type = $('res-type').textContent;
   const style = typeColors[type] || { bg: '#1a1a1a', accent: '#fff', tags: ['未知'] };
 
+  const W = 600, H = 900;
   const canvas = document.createElement('canvas');
-  canvas.width = 600;
-  canvas.height = 900;
+  canvas.width = W;
+  canvas.height = H;
   const ctx = canvas.getContext('2d');
+  const pad = 36;
 
-  // ===== 背景 =====
-  ctx.fillStyle = style.bg;
-  ctx.fillRect(0, 0, 600, 900);
+  // ===== 背景（带微妙渐变） =====
+  const grad = ctx.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, style.bg);
+  grad.addColorStop(1, shadeColor(style.bg, -20));
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
 
-  // 顶部装饰细线
+  // ===== 外边框（档案感） =====
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(pad - 8, pad - 8, W - (pad - 8) * 2, H - (pad - 8) * 2);
+
+  // 四角装饰方块
+  const corner = 6;
   ctx.fillStyle = style.accent;
-  ctx.fillRect(60, 60, 480, 2);
+  [[pad-8,pad-8], [W-pad+2,pad-8], [pad-8,H-pad+2], [W-pad+2,H-pad+2]].forEach(function(p) {
+    ctx.fillRect(p[0], p[1], corner, corner);
+  });
 
-  // ===== 品牌标（小） =====
+  // ===== 档案编号条 =====
+  ctx.fillStyle = 'rgba(0,0,0,0.25)';
+  ctx.fillRect(pad, pad, W - pad * 2, 28);
   ctx.fillStyle = 'rgba(255,255,255,0.5)';
-  ctx.font = '12px sans-serif';
+  ctx.font = '11px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('档案编号：LABTI-' + type + '-' + Math.floor(Math.random()*9000+1000), pad + 12, pad + 19);
+  ctx.textAlign = 'right';
+  ctx.fillText('密级：仅供同门传阅', W - pad - 12, pad + 19);
+
+  // ===== 品牌标 =====
   ctx.textAlign = 'center';
-  ctx.fillText('科研TI  ·  RESEARCHER TYPE INDICATOR', 300, 95);
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('科研TI  ·  RESEARCHER TYPE INDICATOR', W/2, pad + 56);
 
   // ===== 获取数据 =====
   const animal = $('res-animal').textContent;
@@ -813,73 +854,110 @@ async function generateShareImage() {
   const curse = $('res-curse').textContent;
   const crime = $('res-crime').textContent;
 
+  // ===== Emoji 圆形背景 =====
+  const emojiY = 210;
+  ctx.beginPath();
+  ctx.arc(W/2, emojiY, 80, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.08)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
   // ===== 大 Emoji =====
   ctx.textAlign = 'center';
   ctx.fillStyle = '#ffffff';
-  ctx.font = '160px serif';
-  ctx.fillText(animal, 300, 300);
+  ctx.font = '140px serif';
+  ctx.fillText(animal, W/2, emojiY + 45);
 
-  // ===== 4 字母代码（超大） =====
-  ctx.font = 'bold 80px monospace';
+  // ===== 4 字母代码 =====
+  ctx.font = 'bold 72px monospace';
   ctx.fillStyle = '#ffffff';
-  ctx.fillText(type, 300, 420);
+  ctx.fillText(type, W/2, 360);
 
   // ===== 称号 =====
-  ctx.font = 'bold 36px "Noto Serif SC", serif';
+  ctx.font = 'bold 32px "Noto Serif SC", serif';
   ctx.fillStyle = style.accent;
-  ctx.fillText(title, 300, 475);
+  ctx.fillText(title, W/2, 410);
 
-  // ===== 分隔装饰 =====
-  ctx.fillStyle = 'rgba(255,255,255,0.25)';
-  ctx.fillRect(200, 505, 200, 1);
+  // ===== 虚线分隔 =====
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([6, 4]);
+  ctx.beginPath();
+  ctx.moveTo(120, 440);
+  ctx.lineTo(480, 440);
+  ctx.stroke();
+  ctx.setLineDash([]);
 
   // ===== 诅咒金句 =====
-  ctx.font = 'italic 22px "Noto Serif SC", serif';
-  ctx.fillStyle = 'rgba(255,255,255,0.9)';
+  ctx.font = 'italic 20px "Noto Serif SC", serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.85)';
   const curseClean = curse.replace(/^["']|["']$/g, '');
-  wrapText(ctx, '「' + curseClean + '」', 300, 545, 460, 36);
+  wrapText(ctx, '「' + curseClean + '」', W/2, 475, 440, 32);
 
   // ===== 罪名标签（主 Pill） =====
   const crimeText = crime.replace('核心罪名：', '');
-  ctx.font = 'bold 18px monospace';
+  ctx.font = 'bold 16px monospace';
   ctx.fillStyle = '#fff';
   ctx.textAlign = 'center';
   const cw = ctx.measureText(crimeText).width;
-  const cBoxW = cw + 44;
-  const cBoxX = 300 - cBoxW / 2;
-  const cBoxY = 680;
+  const cBoxW = cw + 40;
+  const cBoxX = W/2 - cBoxW / 2;
+  const cBoxY = 600;
   ctx.strokeStyle = style.accent;
   ctx.lineWidth = 2;
-  ctx.strokeRect(cBoxX, cBoxY, cBoxW, 40);
-  ctx.fillText(crimeText, 300, cBoxY + 27);
+  ctx.strokeRect(cBoxX, cBoxY, cBoxW, 36);
+  ctx.fillText(crimeText, W/2, cBoxY + 24);
 
   // ===== 关键词小 Tags =====
   const tags = style.tags;
-  ctx.font = '13px sans-serif';
-  let tagX = 300 - (tags.length * 70) / 2;
-  const tagY = 760;
+  ctx.font = '12px sans-serif';
+  let tagX = W/2;
+  let tagTotalW = 0;
+  tags.forEach(function(tag) {
+    tagTotalW += ctx.measureText(tag).width + 24 + 8;
+  });
+  tagTotalW -= 8;
+  tagX -= tagTotalW / 2;
+  const tagY = 660;
   tags.forEach(function(tag) {
     const tw = ctx.measureText(tag).width;
-    const tBoxW = tw + 20;
-    ctx.fillStyle = 'rgba(255,255,255,0.12)';
-    ctx.fillRect(tagX, tagY, tBoxW, 30);
-    ctx.fillStyle = 'rgba(255,255,255,0.85)';
-    ctx.fillText(tag, tagX + tBoxW / 2, tagY + 20);
-    tagX += tBoxW + 10;
+    const tBoxW = tw + 24;
+    ctx.fillStyle = 'rgba(255,255,255,0.1)';
+    ctx.fillRect(tagX, tagY, tBoxW, 28);
+    ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(tagX, tagY, tBoxW, 28);
+    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+    ctx.fillText(tag, tagX + tBoxW / 2, tagY + 19);
+    tagX += tBoxW + 8;
   });
 
-  // ===== 底部品牌 =====
-  ctx.fillStyle = 'rgba(255,255,255,0.35)';
-  ctx.font = '13px sans-serif';
+  // ===== 底部品牌 & 装饰线（上移避免和二维码重叠） =====
+  ctx.fillStyle = 'rgba(255,255,255,0.3)';
+  ctx.font = '12px sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('测测你的同门是什么罪名  ·  科研TI', 300, 850);
+  ctx.fillText('测测你的同门是什么罪名  ·  科研TI', W/2, 800);
 
-  // 底部装饰线
   ctx.fillStyle = style.accent;
-  ctx.fillRect(60, 870, 480, 2);
+  ctx.fillRect(pad, 815, W - pad * 2, 1.5);
 
-  // 右下角二维码
-  await drawQRCode(ctx, SITE_URL, 460, 760, 100);
+  // 右下角二维码（上移到 700，避免和底部线重叠）
+  await drawQRCode(ctx, SITE_URL, 460, 700, 90);
+
+  // 左下角"机密"斜章
+  ctx.save();
+  ctx.translate(pad + 40, H - pad - 30);
+  ctx.rotate(-Math.PI / 12);
+  ctx.strokeStyle = 'rgba(139,26,26,0.4)';
+  ctx.lineWidth = 2;
+  ctx.strokeRect(-30, -14, 60, 28);
+  ctx.fillStyle = 'rgba(139,26,26,0.5)';
+  ctx.font = 'bold 13px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('机 密', 0, 5);
+  ctx.restore();
 
   return canvas.toDataURL('image/png');
 }
