@@ -28,11 +28,11 @@
     <div class="badge">未通过任何伦理审查委员会批准</div>
     <div class="intro">
       基于非正规心理学、实验室田野调查和凌晨三点的组会记录，<br>
-      十二道灵魂拷问，揭示你的科研本质与核心罪名。<br>
+      十六道灵魂拷问，揭示你的科研本质与核心罪名。<br>
       <strong>如果你感觉被冒犯，那说明我们戳中了真问题。</strong>
     </div>
     <div>
-      <button class="btn btn-primary" onclick="startQuiz()">开始诊断（12题）</button>
+      <button class="btn btn-primary" onclick="startQuiz()">开始诊断（16题）</button>
       <button class="btn btn-secondary" onclick="alert('本测试不提供心理安慰或学术建议。如有不适，请立刻转行。')">免责声明</button>
     </div>
     <div class="fake-counter">已有 <span id="fake-count">87,326</span> 名学术受害者确诊了他们的罪名</div>
@@ -43,7 +43,7 @@
 <section id="quiz" class="hidden">
   <div class="quiz-header">
     <div class="progress-bg"><div class="progress-fill" id="progress-fill" style="width: 0%"></div></div>
-    <div class="question-count" id="question-count">问题 1 / 12</div>
+    <div class="question-count" id="question-count">问题 1 / 16</div>
   </div>
   <div class="question-box" id="question-box">
     <div class="question-number" id="question-number">QUESTION 01</div>
@@ -122,16 +122,6 @@
     <div class="result-text" id="res-lifespan"></div>
     <div class="lifespan-bar"><div class="lifespan-fill" id="lifespan-fill" style="width: 0%"></div></div>
     <div class="lifespan-label" id="lifespan-label"></div>
-  </div>
-
-  <div class="archive-card">
-    <div class="section-title"><span class="icon">&#x1F4E8;</span>同行评审意见</div>
-    <div class="review-box" id="res-review"></div>
-  </div>
-
-  <div class="archive-card">
-    <div class="section-title"><span class="icon">&#x1F4AC;</span>导师评语</div>
-    <div class="quote-box" id="res-advisor"></div>
   </div>
 
   <div class="archive-card">

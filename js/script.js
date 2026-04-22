@@ -244,7 +244,7 @@ const results = {
     curse: "你让大众爱上科学，但科学界永远不会爱你。",
     crime: "核心罪名：不务正业罪",
     crimeDesc: "你爱科学，但你的天赋不在做研究，而在传播研究。你能把复杂的理论讲成段子，能把枯燥的论文变成漫画。你的同行看不起你，觉得你'做科普是因为做不动科研'。你的公众号比你的Google Scholar主页流量高一百倍。你的成就感来自评论区的一句'原来是这样！'，而不是审稿人的'Accept'。",
-    danger: "科普在中国学术评价体系中几乎不值钱。你做越大，评价体系的耳光越响。而且，一旦你说错了一个细节，全网都会来教你做人。更惨的是，当你需要申请奖学金或毕业时，你的'科普成果'不被承认。",",
+    danger: "科普在中国学术评价体系中几乎不值钱。你做越大，评价体系的耳光越响。而且，一旦你说错了一个细节，全网都会来教你做人。更惨的是，当你需要申请奖学金或毕业时，你的'科普成果'不被承认。",
     guide: "别理他们。这个社会需要你做的工作，远比需要另一篇水论文更多。建议挂靠一个科普机构，别在纯科研单位混。用你的影响力去倒逼评价体系改变，而不是等待被评价体系认可。",
     boss: "你需要一个开明且有一定社会地位的大佬罩着。否则你每次评奖或答辩都会被同行打压——他们会说你不务正业，尽管你的'正业'可能比他们更有社会价值。"
   },
@@ -262,7 +262,7 @@ const results = {
     curse: "你会在黑名单上度过余生，而黑名单会越来越长。",
     crime: "核心罪名：说真话罪",
     crimeDesc: "你是学术界的良心（或者说，痛感）。你公开批评学阀，你拒绝审关系稿，你在社交媒体上揭露学术不端。你是那个在群里说'emperor has no clothes'的小孩。你的存在让所有人不舒服，包括那些同意你的人——因为他们不敢和你站在一起。",
-    danger: "你会被所有期刊拉黑，你的毕业签字永远拿不到，你的同门都躲着你。在一个腐烂的系统里，太干净是一种罪。你会慢慢发现：不是大家不知道真相，是大家选择了不知道。而你的'知道'，成了你的原罪。",",
+    danger: "你会被所有期刊拉黑，你的毕业签字永远拿不到，你的同门都躲着你。在一个腐烂的系统里，太干净是一种罪。你会慢慢发现：不是大家不知道真相，是大家选择了不知道。而你的'知道'，成了你的原罪。",
     guide: "要么学会'体制内斗争'的智慧（比如匿名），要么彻底转行去媒体/NGO/工业界。面对面的硬刚，成本太高。记住：活着的见证者比死去的烈士更有用。保护好自己，才能继续发声。",
     boss: "你需要一个已经退休且不怕事的导师作为精神教父。或者根本不需要导师，你需要的是律师。"
   },
@@ -300,113 +300,81 @@ const resultPatches = {
   PLHC: {
     lifespan: '预计再撑2.3个项目周期。主要死因：导师又接了一个新项目，你被抽去"帮忙"。',
     lifespanPct: 15,
-    review: '<span class="reviewer">Reviewer #2:</span> "The subject demonstrates excessive dedication and an alarming inability to say no. Reproducibility of work-life balance: FAILED. <span class="verdict">Recommend: REJECT</span> (exploitation unsustainable)."',
-    advisorComment: '这孩子不错，就是还需要再磨练磨练。<span class="translation">翻译：还能再榨三年。</span>',
     career: '送外卖。至少按单结算，不会被抢一作。'
   },
   PLHF: {
     lifespan: '预计寿命等于你的最长学习年限倒计时。好消息：导师可能比你还急。',
     lifespanPct: 10,
-    review: '<span class="reviewer">Editor:</span> "Novelty insufficient. The author has been saying \'yes\' for too long. Major revision required: learn to say \'no\'. <span class="verdict">Recommend: REJECT</span>."',
-    advisorComment: '踏实，可靠，就是不太主动。<span class="translation">翻译：不会来事，不懂得争取利益。</span>',
     career: '公务员。你的温顺终于成了优点。'
   },
   PLSC: {
     lifespan: '永续经营。除非你的靠山倒了，或者你靠山的孩子也需要这个位置。',
     lifespanPct: 95,
-    review: '<span class="reviewer">Editor:</span> "Accept with minor revisions. The subject demonstrates excellent networking skills. <span class="verdict">Conflict of interest: subject IS the conflict.</span>"',
-    advisorComment: '这是我带过最优秀的学生。<span class="translation">翻译：最像我的学生，未来接班人。</span>',
     career: 'politician。你已经具备了所有必要技能。'
   },
   PLFC: {
     lifespan: '美貌保质期约3年，关系网半衰期约5年。建议尽早转型为"学术名媛"。',
     lifespanPct: 40,
-    review: '<span class="reviewer">Reviewer #1:</span> "The data appears beautiful but lacks raw files. The statistical analysis was performed by someone else. <span class="verdict">Recommend: REJECT</span> due to reproducibility concerns."',
-    advisorComment: '很有灵气，社交能力很强。<span class="translation">翻译：实验是谁做的来着？算了不重要。</span>',
     career: '网红经纪。你深谙包装人设之道。'
   },
   PRHC: {
     lifespan: '毕业倒计时已启动。目前剩余：取决于你最后一次投稿能否被接收，以及导师是否愿意签字。',
     lifespanPct: 20,
-    review: '<span class="reviewer">Editor:</span> "<span class="verdict">REJECT.</span> The subject\'s attitude problem exceeds journal standards. Suggest submission to Journal of Unemployment."',
-    advisorComment: '想法很多，但不太听话。<span class="translation">翻译：不好控制，无法成为我的工具人。</span>',
     career: '独立咨询师。至少不用再跪了，虽然可能没客户。'
   },
   PRHF: {
     lifespan: '预计寿命：直到导师忍无可忍把你踢出群聊。但你可能会因为"存在感太低"而被遗忘在群里，继续摸鱼。',
     lifespanPct: 70,
-    review: '<span class="reviewer">Reviewer #3:</span> "<span class="verdict">ACCEPT.</span> The subject demonstrates exceptional work-life balance. Productivity: zero, but stress level: also zero. We should all learn from this master."',
-    advisorComment: '这孩子有自己的节奏。<span class="translation">翻译：我已经放弃他了，只要别给我惹事。</span>',
     career: '游戏主播。你已经在训练了，而且段位比科研水平高得多。'
   },
   PRSC: {
     lifespan: '直到下一个AI工具取代你。或者直到你的粉丝发现你的"秘籍"是从知乎抄的。',
     lifespanPct: 60,
-    review: '<span class="reviewer">Editor:</span> "<span class="verdict">ACCEPT</span> for publication in \'Predatory Journals Quarterly\'. Impact factor: your bank account balance."',
-    advisorComment: '不务正业。<span class="translation">翻译：赚得比我还多，眼红。</span>',
     career: '你已经在做了，而且做得很好。'
   },
   PRSF: {
     lifespan: '直到导师要求你提交独立代表作。预计还有1-3年，珍惜你最后的蹭名时光。',
     lifespanPct: 25,
-    review: '<span class="reviewer">Reviewer #2:</span> "<span class="verdict">REJECT.</span> The subject claims expertise in 12 fields. Citation analysis reveals h-index = 0 in all of them."',
-    advisorComment: '涉猎广泛。<span class="translation">翻译：没有一篇是他独立完成的。</span>',
     career: '人力资源。擅长蹭项目和混圈子，这确实是HR的核心技能。'
   },
   TLHC: {
     lifespan: '在国内的毕业概率≈0。在国外的毕业概率≈∞。几何平均：你算算。',
     lifespanPct: 50,
-    review: '<span class="reviewer">Editor:</span> "<span class="verdict">REJECT.</span> This work is too original for our readership. We recommend the subject leave the country immediately."',
-    advisorComment: '太理想化了。<span class="translation">翻译：不懂人情世故，帮不上我的忙。</span>',
     career: '工业界研发。那里尊重你的想法，而且收入是助学金的10倍。'
   },
   TLHF: {
     lifespan: '预计寿命：无限。因为你从不参与竞争，所以也永远不会被淘汰——只会被遗忘在实验室的角落里发霉。',
     lifespanPct: 40,
-    review: '<span class="reviewer">Reviewer #1:</span> "<span class="verdict">REJECT.</span> The subject claims to be \'working on a long-term project\' but has produced no data in 5 years. Recommend: check if subject is still alive."',
-    advisorComment: '很有个性，不太合群。<span class="translation">翻译：不知道他在干什么，但也没给我添麻烦，就先养着吧。</span>',
     career: '实验室设备管理员。反正你比任何人都熟悉器材位置和过期试剂的库存。'
   },
   TLSC: {
     lifespan: '直到科普被纳入学术评价体系。也就是：永远不会。',
     lifespanPct: 45,
-    review: '<span class="reviewer">Editor:</span> "<span class="verdict">REJECT.</span> This is \'science communication\', not \'science\'. Suggest resubmission to TikTok."',
-    advisorComment: '科普做得不错。<span class="translation">翻译：不是正经科研，毕业答辩不算数。</span>',
     career: '脱口秀演员。你已经具备了核心技能：把痛苦变成笑声。'
   },
   TLSF: {
     lifespan: '直到你学会说"不"。根据当前趋势，预计寿命：无限趋近于你的最长学习年限。',
     lifespanPct: 20,
-    review: '<span class="reviewer">Reviewer #3:</span> "<span class="verdict">REJECT.</span> The acknowledgments section is longer than the results. Over-credited and under-contributed."',
-    advisorComment: '组里不能没有他。<span class="translation">翻译：没人修电脑、订外卖、管报销了。</span>',
     career: '行政助理。你的终极归宿。'
   },
   TRHC: {
     lifespan: '直到你被所有期刊联合封杀。以你目前的拉黑速度，预计还有1-2年。',
     lifespanPct: 10,
-    review: '<span class="reviewer">Editor:</span> "<span class="verdict">REJECT.</span> The subject has insulted every member of the editorial board. Blacklist recommended. Also reported to ethics committee."',
-    advisorComment: '很有个性。<span class="translation">翻译：想把他逐出师门，但又怕他在网上曝光我。</span>',
     career: '调查记者。说真话的勇气还在，而且不需要影响因子。'
   },
   TRHF: {
     lifespan: '预计寿命：直到你的"理论"在组会上被公开处刑。或者直到你发现毕业比推翻相对论更难——以先到者为准。',
     lifespanPct: 20,
-    review: '<span class="reviewer">Reviewer #2:</span> "<span class="verdict">REJECT.</span> Claims to have unified general relativity and quantum mechanics using \'intuition\'. Evidence: a notebook full of doodles. Recommend: psychiatric evaluation."',
-    advisorComment: '想法很大胆。<span class="translation">翻译：完全不懂他在干什么，但看起来挺忙的，就先不管了。</span>',
     career: 'B站科普UP主。反正你的理论也发不了论文，不如做成视频骗点击。'
   },
   TRSC: {
     lifespan: '直到你的粉丝发现你其实啥也没做。h-index暴露一切。',
     lifespanPct: 35,
-    review: '<span class="reviewer">Editor:</span> "<span class="verdict">REJECT.</span> 10,000 words of critique, 0 words of original research. Signal-to-noise ratio: unacceptable."',
-    advisorComment: '整天在网上胡说八道。<span class="translation">翻译：他说的是真的，但我不能承认。</span>',
     career: '体育评论员。反正都是嘴炮，评价C罗比评价Nature容易多了。'
   },
   TRSF: {
     lifespan: '预计寿命：直到毕业资格审查时发现你缺学分。或者直到导师在群里@你，你从不回复——以先到者为准。',
     lifespanPct: 25,
-    review: '<span class="reviewer">Reviewer #1:</span> "<span class="verdict">REJECT.</span> The subject has not attended a single group meeting in 2 years. Presumed dropped out. Recommend: confirm enrollment status."',
-    advisorComment: '...<span class="translation">翻译：我甚至想不起他的名字，查了一下名单，确实有这个人——但我不确定他研几了。</span>',
     career: '自由职业者。反正你也不需要工位，有WiFi就能活。'
   }
 };
@@ -607,21 +575,17 @@ function showResult() {
   $('sec-desc').textContent = '你的隐藏人格是「' + secData.title + '」，倾向度 ' + secondary.pct + '%。这意味着在特定情境下，你可能会表现出 ' + secData.title + ' 的特征：' + secData.curse;
   $('sec-fill').style.width = secondary.pct + '%';
 
-  // 恶趣味补丁渲染
+  // 恶趣味补丁渲染（寿命 + 转行）
   const patch = resultPatches[type];
   if (patch) {
     $('res-lifespan').textContent = patch.lifespan;
     $('lifespan-fill').style.width = patch.lifespanPct + '%';
     $('lifespan-label').textContent = '学术寿命指数：' + patch.lifespanPct + '%（基于历史尸检数据）';
-    $('res-review').innerHTML = patch.review;
-    $('res-advisor').innerHTML = patch.advisorComment;
     $('res-career').textContent = patch.career;
   } else {
     $('res-lifespan').textContent = '无法预测。你的存在本身就违背了统计学假设。';
     $('lifespan-fill').style.width = '0%';
     $('lifespan-label').textContent = '学术寿命指数：NULL';
-    $('res-review').innerHTML = '<span class="reviewer">System:</span> "No data available. The subject is not even a researcher."';
-    $('res-advisor').innerHTML = '无评语。<span class="translation">翻译：系统拒绝评价。</span>';
     $('res-career').textContent = '建议删除此账号。';
   }
 
